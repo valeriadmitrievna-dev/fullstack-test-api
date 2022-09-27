@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const Task = require("./task.model");
 
 module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define("user", {

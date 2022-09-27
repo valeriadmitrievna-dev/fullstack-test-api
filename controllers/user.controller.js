@@ -22,7 +22,7 @@ exports.signup = async (req, res) => {
     if (utils.getStringWithNormalSpaces(name).length < 4) {
       return res
         .status(400)
-        .json({ error: "Name length should be 6 or greater" });
+        .json({ error: "Name length should be 4 or greater" });
     }
     if (utils.getStringWithNormalSpaces(username).length < 6) {
       return res

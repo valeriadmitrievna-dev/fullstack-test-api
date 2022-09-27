@@ -23,5 +23,9 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = require("./models/user.model")(sequelize, Sequelize);
+db.tasks = require("./models/task.model")(sequelize, Sequelize);
+
+db.users.hasMany(db.tasks, { onDelete: "CASCADE" });
+db.tasks.belongsTo(db.users);
 
 module.exports = db;

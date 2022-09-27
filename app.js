@@ -23,7 +23,8 @@ db.sequelize
     console.log("Failed to sync db: " + err.message);
   });
 
-  require("./routes/user.routes")(app);
+require("./routes/user.routes")(app);
+require("./routes/task.routes")(app);
 
 app.listen(port, () => {
   console.log(`Server listening on the port  ${port}`);

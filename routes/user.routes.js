@@ -3,7 +3,7 @@ const withAuth = require("../middlewares/auth");
 module.exports = (app) => {
   const users = require("../controllers/user.controller");
 
-  var router = require("express").Router();
+  const router = require("express").Router();
   router.get("/", users.getAll);
   router.get("/data", withAuth, users.getUserData);
   router.post("/signup", users.signup);
