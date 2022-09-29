@@ -7,7 +7,7 @@ const utils = require("../utils");
 exports.create = async (req, res) => {
   try {
     const userId = req.decoded.id;
-    const { title, description } = req.body;
+    const { title, description, deadline } = req.body;
 
     if (!title) {
       return res.status(400).json({ error: "Title is required" });
@@ -27,6 +27,7 @@ exports.create = async (req, res) => {
     const task = await Task.create({
       title,
       description,
+      deadline,
       userId: user.id,
     });
 
@@ -38,7 +39,8 @@ exports.create = async (req, res) => {
 
 exports.getAll = async (req, res) => {
   try {
-    const tasks = await Task.findAll();
+    const { id } = req.decoded;
+    const tasks = await Task.findAll({ where: { userId: id } });
     return res.status(200).json(tasks);
   } catch (err) {
     return res.status(500).json({ error: err.message });

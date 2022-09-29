@@ -12,6 +12,10 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: false,
       allowNull: false,
     },
+    deadline: {
+      type: Sequelize.DATE,
+      allowNull: true
+    }
   });
 
   return Task;

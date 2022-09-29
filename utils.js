@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   getStringWithNormalSpaces(value) {
-    return value.replace(/\s+/g, " ");
+    return value.replace(/ +(?= )/g, "").trim();
   },
   async hash(text, size) {
     try {
