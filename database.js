@@ -7,7 +7,7 @@ const database = process.env.DB_NAME;
 const dialect = process.env.DB_DIALECT;
 const URI = process.env.DATABASE_URL;
 const options =
-  process.env.ENV === "development" ? [database, username, password] : URI;
+  process.env.ENV === "development" ? [database, username, password] : [URI];
 
 const sequelize = new Sequelize(...options, {
   host: hostName,
