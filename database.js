@@ -1,21 +1,10 @@
 const { Sequelize } = require("sequelize");
 
-const hostName = process.env.DB_HOST;
-const username = process.env.DB_USER;
-const password = process.env.DB_PASSWORD;
-const database = process.env.DB_NAME;
-const dialect = process.env.DB_DIALECT;
+const URL = process.env.DATABASE_URL;
 
-const sequelize = new Sequelize(database, username, password, {
-  host: hostName,
-  dialect: dialect,
-  operatorsAliases: false,
-  dialectOptions: {
-    ssl: {
-      require: false,
-      rejectUnauthorized: false,
-    },
-  },
+const sequelize = new Sequelize(URL, {
+  dialect: "postgres",
+  ssl: false,
   pool: {
     max: 10,
     min: 0,
