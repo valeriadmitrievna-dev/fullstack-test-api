@@ -40,7 +40,10 @@ exports.create = async (req, res) => {
 exports.getAll = async (req, res) => {
   try {
     const { id } = req.decoded;
-    const tasks = await Task.findAll({ where: { userId: id } });
+    const tasks = await Task.findAll({
+      where: { userId: id },
+      order: [["createdAt", "DESC"]],
+    });
     return res.status(200).json(tasks);
   } catch (err) {
     return res.status(500).json({ error: err.message });
@@ -65,9 +68,9 @@ exports.getTask = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, done } = req.body;
+    const { title, description, done, deadline } = req.body;
 
-    if (!title && !description && !done) {
+    if (!title && !description && done === undefined && !deadline) {
       return res
         .status(400)
         .json({ error: "Trying to update with empty data" });
@@ -80,7 +83,7 @@ exports.update = async (req, res) => {
         .json({ error: `Task with ID=${id} doesn't exist` });
     }
 
-    await task.update({ title, description, done });
+    await task.update({ title, description, done, deadline });
 
     return res.status(200).json(task);
   } catch (err) {
