@@ -5,8 +5,11 @@ const username = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
 const database = process.env.DB_NAME;
 const dialect = process.env.DB_DIALECT;
+const URI = process.env.DATABASE_URL;
+const options =
+  process.env.ENV === "development" ? [database, username, password] : URI;
 
-const sequelize = new Sequelize(database, username, password, {
+const sequelize = new Sequelize(...options, {
   host: hostName,
   dialect: dialect,
   operatorsAliases: false,
